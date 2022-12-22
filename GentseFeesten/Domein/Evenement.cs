@@ -13,5 +13,11 @@ namespace Domein
         public int Prijs { get; set; }
         public int Stardatum { get; set; }
         public int Einddatum { get; set; }
+        public string Beschrijving { get; set; }
+        public Evenement Parent { get; set; }
+
+        public List<Evenement> kinderEvenementen;
+
+
     }
 }

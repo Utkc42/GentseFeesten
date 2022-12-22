@@ -8,5 +8,7 @@ namespace Domein
 {
     public class Gebruiker
     {
+        public string Naam { get; set; }
+        public int id { get; set; }
     }
 }
