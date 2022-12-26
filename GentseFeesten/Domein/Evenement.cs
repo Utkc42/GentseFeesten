@@ -8,16 +8,26 @@ namespace Domein
 {
     public class Evenement
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Naam { get; set; }
         public int Prijs { get; set; }
-        public int Stardatum { get; set; }
-        public int Einddatum { get; set; }
         public string Beschrijving { get; set; }
-        public Evenement Parent { get; set; }
+        public string ParentId { get; set; }
+        public DateTime EindDatum { get; }
+        public DateTime StartDatum { get; }
 
-        public List<Evenement> kinderEvenementen;
+        public List<string> kinderEvenementenIds { get; set; }
 
-
+        public Evenement(string id, DateTime eindDatum, DateTime startDatum, string[] kinderEvenementen, string idParent, string beschrijving, string naam, int prijs)
+        {
+            Id = id;
+            EindDatum = eindDatum;
+            StartDatum = startDatum;
+            Beschrijving = beschrijving;
+            Naam = naam;
+            Prijs = prijs;
+            this.kinderEvenementenIds = new List<string>(kinderEvenementen.ToList<string>());
+            this.ParentId= idParent;
+        }
     }
 }

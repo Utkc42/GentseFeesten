@@ -10,6 +10,22 @@ namespace Domein
     {
         private List<Evenement> _evenementen;
 
+        public Planner(int id, int gebruikerId, string evenementId)
+        {
+            Id = id;
+            GebruikerId = gebruikerId;
+            EvenementId = evenementId;
+        }
+        public Planner(int gebruikerId, string evenementId)
+        {
+            GebruikerId = gebruikerId;
+            EvenementId = evenementId;
+        }
+
+        public int Id { get; }
+        public int GebruikerId { get; }
+        public string EvenementId { get; }
+
         public void VoegEvenementToeAanPlanner(Evenement evenement)
         {
             _evenementen.Add(evenement);
@@ -21,10 +37,10 @@ namespace Domein
             _evenementen.Remove(evenement);
         }
 
-        public List<Evenement> SorteerChronologisch(Evenement evenement)
-        {
-            // TODO _evenementen sorteren op datum
-        }
+        //public List<Evenement> SorteerChronologisch(Evenement evenement)
+        //{
+        //    // TODO _evenementen sorteren op datum
+        //}
 
         public int TotalePrijs()
         {
