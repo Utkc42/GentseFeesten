@@ -10,15 +10,15 @@ namespace Domein
     {
         public string Id { get; set; }
         public string Naam { get; set; }
-        public int Prijs { get; set; }
+        public int? Prijs { get; set; }
         public string Beschrijving { get; set; }
         public string ParentId { get; set; }
-        public DateTime EindDatum { get; }
-        public DateTime StartDatum { get; }
+        public DateTime? EindDatum { get; }
+        public DateTime? StartDatum { get; }
 
         public List<string> kinderEvenementenIds { get; set; }
 
-        public Evenement(string id, DateTime eindDatum, DateTime startDatum, string[] kinderEvenementen, string idParent, string beschrijving, string naam, int prijs)
+        public Evenement(string id, DateTime? eindDatum, DateTime? startDatum, string[] kinderEvenementen, string idParent, string beschrijving, string naam, int? prijs)
         {
             Id = id;
             EindDatum = eindDatum;
@@ -28,6 +28,11 @@ namespace Domein
             Prijs = prijs;
             this.kinderEvenementenIds = new List<string>(kinderEvenementen.ToList<string>());
             this.ParentId= idParent;
+        }
+
+        public override string? ToString()
+        {
+            return $"{Naam} | {Prijs} euro | van {StartDatum} tot {EindDatum}";
         }
     }
 }

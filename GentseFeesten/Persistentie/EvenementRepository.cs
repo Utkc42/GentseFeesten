@@ -22,7 +22,7 @@ namespace Persistentie
             List<Evenement> output = new List<Evenement>();
 
             SqlConnection connection = new SqlConnection(_connectionString);
-            string query = "SELECT * FROM Evenement;";
+            string query = "SELECT * FROM Evenementen;";
 
             using (SqlCommand cmd = connection.CreateCommand())
             {
@@ -43,28 +43,28 @@ namespace Persistentie
                         string naam = (string)reader["naam"];
                         int prijs = (int)reader["prijs"];
 
-                        
 
-                        Evenement e = new Evenement(id, eindDatum, startDatum,  kinderEvenementen, idParent, beschrijving, naam, prijs); // hier heb ik prijs bijgeschreven, dan ctor gemaakt in de Evenement klasse.
+
+                        Evenement e = new Evenement(id, eindDatum, startDatum, kinderEvenementen, idParent, beschrijving, naam, prijs);
                         output.Add(e);
 
                     }
 
                     return output;
-                    
+
                 }
                 catch (Exception ex)
                 {
 
                     throw new EvenementRepositoryException("EvenementRepository - GeefAlleEvenementen", ex);
                 }
-                finally 
+                finally
                 {
-                    connection.Close(); 
+                    connection.Close();
                 }
             }
         }
-        
+
 
 
         public List<Evenement> GeefBijEvenementen(Evenement parent)
@@ -72,7 +72,7 @@ namespace Persistentie
             List<Evenement> output = new List<Evenement>();
 
             SqlConnection connection = new SqlConnection(_connectionString);
-            string query = "SELECT * FROM Evenement where id_parent = @parentid;";
+            string query = "SELECT * FROM Evenementen where id_parent = @parentid;";
 
             using (SqlCommand cmd = connection.CreateCommand())
             {
@@ -97,7 +97,7 @@ namespace Persistentie
 
 
 
-                        Evenement e = new Evenement(id, eindDatum, startDatum, kinderEvenementen, idParent, beschrijving, naam, prijs); // hier heb ik prijs bijgeschreven, dan ctor gemaakt in de Evenement klasse.
+                        Evenement e = new Evenement(id, eindDatum, startDatum, kinderEvenementen, idParent, beschrijving, naam, prijs);
                         output.Add(e);
 
                     }
@@ -122,7 +122,7 @@ namespace Persistentie
             List<Evenement> output = new List<Evenement>();
 
             SqlConnection connection = new SqlConnection(_connectionString);
-            string query = "SELECT * FROM Evenement where id_parent IS NULL;";
+            string query = "select * from Evenementen where id_parent IS NULL;";
 
             using (SqlCommand cmd = connection.CreateCommand())
             {
@@ -135,19 +135,79 @@ namespace Persistentie
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        string id = (string)reader["id"];
-                        DateTime eindDatum = (DateTime)reader["einddatum"];
-                        DateTime startDatum = (DateTime)reader["startdatum"];
-                        string kinderEvenementenString = (string)reader["kinder_evenement"];
+                        string id;
+                        DateTime? eindDatum;
+                        DateTime? startDatum;
+                        string kinderEvenementenString;
+                        string idParent;
+                        string beschrijving;
+                        string naam;
+                        int? prijs;
+
+                        id = (string)reader["id"];
+                        if (!(reader["einddatum"] is DBNull))
+                        {
+                            eindDatum = (DateTime)reader["einddatum"];
+
+                        }
+                        else
+                        {
+                            eindDatum = null;
+                        }
+                        if (!(reader["startdatum"] is DBNull))
+                        {
+                            startDatum = (DateTime)reader["startdatum"];
+
+
+                        }
+                        else
+                        {
+                            startDatum = null;
+                        }
+                        if (!(reader["kinder_evenement"] is DBNull))
+                        {
+                            kinderEvenementenString = (string)reader["kinder_evenement"];
+    
+
+                        }
+                        else
+                        {
+                            kinderEvenementenString = null;
+                        }
+                        if (!(reader["id_parent"] is DBNull))
+                        {
+                            idParent = (string)reader["id_parent"];
+
+
+                        }
+                        else
+                        {
+                            idParent = null;
+                        }
                         string[] kinderEvenementen = kinderEvenementenString.Split(',');
-                        string idParent = (string)reader["id_parent"];
-                        string beschrijving = (string)reader["beschrijving"];
-                        string naam = (string)reader["naam"];
-                        int prijs = (int)reader["prijs"];
+                        if (!(reader["beschrijving"] is DBNull))
+                        {
+                            beschrijving = (string)reader["beschrijving"];
+
+
+                        }
+                        else
+                        {
+                            beschrijving = null;
+                        }
+                        naam = (string)reader["naam"];
+                        if (!(reader["prijs"] is DBNull))
+                        {
+                            prijs = (int)reader["prijs"];
+                        }
+                        else
+                        {
+                            prijs = null;
+                        }
 
 
 
-                        Evenement e = new Evenement(id, eindDatum, startDatum, kinderEvenementen, idParent, beschrijving, naam, prijs); // hier heb ik prijs bijgeschreven, dan ctor gemaakt in de Evenement klasse.
+                        Evenement e = new Evenement(id, eindDatum, startDatum, kinderEvenementen, idParent, beschrijving, naam, prijs);
                         output.Add(e);
 
                     }
@@ -158,7 +218,7 @@ namespace Persistentie
                 catch (Exception ex)
                 {
 
-                    throw new EvenementRepositoryException("EvenementRepository - GeefBijEvenementen", ex);
+                    throw new EvenementRepositoryException("EvenementRepository - GeefTopLevelEvenementen", ex);
                 }
                 finally
                 {
@@ -170,7 +230,7 @@ namespace Persistentie
         public void VerwijderEvenement(Evenement evenement)
         {
             SqlConnection connection = new SqlConnection(_connectionString);
-            string query = "DELETE FROM Evenement WHERE id = @id;";
+            string query = "DELETE FROM Evenementen WHERE id = @id;";
 
             using (SqlCommand cmd = connection.CreateCommand())
             {
@@ -180,7 +240,7 @@ namespace Persistentie
                     cmd.CommandText = query;
                     cmd.Parameters.AddWithValue("@id", evenement.Id);
 
-                     cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
 
 
                 }
@@ -199,7 +259,7 @@ namespace Persistentie
         public void VoegEvenementToe(Evenement evenement)
         {
             SqlConnection connection = new SqlConnection(_connectionString);
-            string query = "INSERT INTO Evenement(id,einddatum,startdatum,kinder_evenement,id_parent,beschrijving,naam,prijs) VALUES (@id, @einddatum, @startdatum, @kinder_evenement, @id_parent, @beschrijving, @naam, @prijs);";
+            string query = "INSERT INTO Evenementen(id,einddatum,startdatum,kinder_evenement,id_parent,beschrijving,naam,prijs) VALUES (@id, @einddatum, @startdatum, @kinder_evenement, @id_parent, @beschrijving, @naam, @prijs);";
 
             using (SqlCommand cmd = connection.CreateCommand())
             {

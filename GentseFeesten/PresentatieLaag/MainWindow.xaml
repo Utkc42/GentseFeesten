@@ -17,12 +17,12 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
-        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Welkom op de Gentse Feesten" HorizontalAlignment="Center"/>
-        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Top Level Evenementen:" HorizontalAlignment="Center"/>
-        <ListBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
-        <Button Grid.Row="3" Grid.Column="0" Content="Evenement Toevoegen"/>
-        <Button Grid.Row="3" Grid.Column="1" Content="Open Planner"/>
+
+        <Label x:Name="WelkomTittel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Welkom op de Gentse Feesten" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="0,15,0,0"/>
+        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Top Level Evenementen:" HorizontalAlignment="Center" FontSize="15" Margin="0,25,0,0"/>
+        <ListBox Grid.Row="2" Grid.Column="0" Name="topLevelEvtListBox" Grid.ColumnSpan="2"/>
+        <Button Grid.Row="3" Grid.Column="0" Content="Evenement Toevoegen" Click="ToeVoegen_Btn" Margin="50,5,50,5" FontSize="14"/>
+        <Button Grid.Row="3" Grid.Column="1" Content="Open Planner" Click="OpenPlanner_Btn"  Margin="50,5,50,5" FontSize="14"/>
 
 
     </Grid>

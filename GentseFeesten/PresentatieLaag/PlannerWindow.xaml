@@ -12,15 +12,15 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="PLANNER" HorizontalAlignment="Center"/>
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="PLANNER" HorizontalAlignment="Center" FontSize="16" Margin="0,20,0,0" FontWeight="Bold"/>
         <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
-        <Button Grid.Row="2" Grid.Column="0" Content="HOME" Margin="50,5,50,5"/>
-        <Button Grid.Row="2" Grid.Column="1" Content="Verwijderen" Margin="50,5,50,5"/>
+        <Button Grid.Row="2" Grid.Column="0" Content="HOME" Margin="50,5,50,5" FontSize="13" Click="Home_Btn"/>
+        <Button Grid.Row="2" Grid.Column="1" Content="Verwijderen" Margin="50,5,50,0" FontSize="13" Height="21" VerticalAlignment="Top" Click="VerwijderBtn"/>
     </Grid>
 </Window>

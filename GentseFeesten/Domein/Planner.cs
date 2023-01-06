@@ -16,11 +16,7 @@ namespace Domein
             GebruikerId = gebruikerId;
             EvenementId = evenementId;
         }
-        public Planner(int gebruikerId, string evenementId)
-        {
-            GebruikerId = gebruikerId;
-            EvenementId = evenementId;
-        }
+
 
         public int Id { get; }
         public int GebruikerId { get; }
@@ -42,9 +38,9 @@ namespace Domein
         //    // TODO _evenementen sorteren op datum
         //}
 
-        public int TotalePrijs()
+        public int? TotalePrijs()
         {
-            int totaal = 0;
+            int? totaal = 0;
             foreach (Evenement e in _evenementen)
             {
                 totaal = totaal + e.Prijs;

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domein;
+using Persistentie;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,31 @@ namespace PresentatieLaag
     /// </summary>
     public partial class PlannerWindow : Window
     {
-        public PlannerWindow()
+      
+
+        public PlannerWindow(int id)
         {
             InitializeComponent();
         }
+
+        private int _evenementEigenschappen;
+
+        private void Home_Btn(object sender, RoutedEventArgs e)
+        {
+            MainWindow ev = new MainWindow(_evenementEigenschappen);
+            this.Visibility = Visibility.Hidden;
+            ev.Show();
+            
+        }
+
+        
+        private void VerwijderBtn(object sender, RoutedEventArgs e)
+        {
+            //TODO
+            //Planner p = new Planner();
+            //p.VerwijderEvenementVanPlanner();
+        }
+
+        
     }
 }

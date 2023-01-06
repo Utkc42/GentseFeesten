@@ -24,7 +24,7 @@ namespace Persistentie
 
             SqlConnection connection = new SqlConnection(_connectionString);
             
-            string query = "SELECT * FROM Planning WHERE gebruiker_id = @getal;";
+            string query = "SELECT * FROM Planning WHERE gebruiker_id = @x";
 
             using (SqlCommand cmd = connection.CreateCommand())
             {
@@ -32,7 +32,7 @@ namespace Persistentie
                 {
                     connection.Open();
                     cmd.CommandText = query;
-                    cmd.Parameters.AddWithValue("@getal", idVanGebruiker);
+                    cmd.Parameters.AddWithValue("@x", idVanGebruiker);
 
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -66,7 +66,7 @@ namespace Persistentie
 
             SqlConnection connection = new SqlConnection(_connectionString);
 
-            string query = "insert into Planning(gebruiker_id, evenement_id) values(@gebruiker_id, @evenement_id);";
+            string query = "INSERT INTO Planning(gebruiker_id, evenement_id) values(@gebruiker_id, @evenement_id);";
 
             using (SqlCommand cmd = connection.CreateCommand())
             {
