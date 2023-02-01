@@ -11,5 +11,6 @@ namespace Domein
         public List<Planner> GeefAllePlanningen(int idVanGebruiker);
         public void VoegPlanning(Planner p);
         public void VerwijderPlanning(Planner p); 
+        public int TotalePrijs();
     }
 }

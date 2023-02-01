@@ -25,6 +25,7 @@ namespace PresentatieLaag
     public partial class MainWindow : Window
     {
         private int _gebruikerId;
+        private List<Evenement> _evenementList;
         public MainWindow(int id)
         {
             InitializeComponent();
@@ -36,9 +37,9 @@ namespace PresentatieLaag
             EvenementRepository repo = new EvenementRepository(constring);
 
 
-            List<Evenement> evenements = repo.GeefTopLevelEvenementen();
+            _evenementList = repo.GeefTopLevelEvenementen();
 
-            topLevelEvtListBox.ItemsSource = evenements;
+            topLevelEvtListBox.ItemsSource = _evenementList;
 
 
         }
@@ -50,12 +51,16 @@ namespace PresentatieLaag
             this.Visibility = Visibility.Hidden;
 
         }
+
         
         private void ToeVoegen_Btn(object sender, RoutedEventArgs e)
         {
-            //TODO
-            //Planner p = new Evenement();
-            //p.VoegEvenementToeAanPlanner();
+           
+            Planner p = new Planner(_gebruikerId);
+
+            Evenement ev = (Evenement)topLevelEvtListBox.SelectedValue;
+            p.VoegEvenementToeAanPlanner(ev);
+
 
         }
 

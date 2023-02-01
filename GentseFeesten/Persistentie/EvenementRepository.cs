@@ -122,7 +122,7 @@ namespace Persistentie
             List<Evenement> output = new List<Evenement>();
 
             SqlConnection connection = new SqlConnection(_connectionString);
-            string query = "select * from Evenementen where id_parent IS NULL;";
+            string query = "SELECT * FROM Evenementen where id_parent IS NULL;";
 
             using (SqlCommand cmd = connection.CreateCommand())
             {
@@ -154,6 +154,7 @@ namespace Persistentie
                         {
                             eindDatum = null;
                         }
+
                         if (!(reader["startdatum"] is DBNull))
                         {
                             startDatum = (DateTime)reader["startdatum"];
@@ -164,6 +165,7 @@ namespace Persistentie
                         {
                             startDatum = null;
                         }
+
                         if (!(reader["kinder_evenement"] is DBNull))
                         {
                             kinderEvenementenString = (string)reader["kinder_evenement"];
@@ -174,6 +176,7 @@ namespace Persistentie
                         {
                             kinderEvenementenString = null;
                         }
+
                         if (!(reader["id_parent"] is DBNull))
                         {
                             idParent = (string)reader["id_parent"];
@@ -184,6 +187,7 @@ namespace Persistentie
                         {
                             idParent = null;
                         }
+
                         string[] kinderEvenementen = kinderEvenementenString.Split(',');
                         if (!(reader["beschrijving"] is DBNull))
                         {
@@ -195,6 +199,7 @@ namespace Persistentie
                         {
                             beschrijving = null;
                         }
+
                         naam = (string)reader["naam"];
                         if (!(reader["prijs"] is DBNull))
                         {

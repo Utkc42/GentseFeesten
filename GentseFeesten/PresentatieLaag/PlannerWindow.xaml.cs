@@ -21,11 +21,13 @@ namespace PresentatieLaag
     /// </summary>
     public partial class PlannerWindow : Window
     {
-      
+        
+        private List<Evenement> _evenementen = new List<Evenement>();
 
         public PlannerWindow(int id)
         {
             InitializeComponent();
+            plannerListBox.ItemsSource = _evenementen;
         }
 
         private int _evenementEigenschappen;
@@ -41,9 +43,11 @@ namespace PresentatieLaag
         
         private void VerwijderBtn(object sender, RoutedEventArgs e)
         {
-            //TODO
+            // TODO
             //Planner p = new Planner();
-            //p.VerwijderEvenementVanPlanner();
+
+            //Evenement ev = (Evenement)topLevelEvtListBox.SelectedValue;
+            //p.VerwijderEvenementVanPlanner(ev);
         }
 
         

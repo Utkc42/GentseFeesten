@@ -10,7 +10,7 @@ namespace Test
         {
             string constring = @"Data Source=LAPTOP-UMGHNHQ1\SQLEXPRESS;Initial Catalog=GentseFeesten;Integrated Security=True";
 
-            PlannerRepository pr = new PlannerRepository(constring);
+            //PlannerRepository pr = new PlannerRepository(constring);
 
             EvenementRepository repo = new EvenementRepository(constring);
 
@@ -23,28 +23,6 @@ namespace Test
             //Planner p = new Planner(3, "29dec22");
 
             //pr.VoegPlanning(p);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

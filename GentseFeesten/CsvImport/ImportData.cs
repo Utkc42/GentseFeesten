@@ -143,7 +143,7 @@ namespace CsvImport
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Fout bij het importeren");
+                    throw new Exception("Fout bij het importeren", ex);
                     
                 }
                 finally
